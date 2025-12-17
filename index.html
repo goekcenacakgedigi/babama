@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yılmaz Nacakgediği — İyi ki doğdun baba</title>
+  <meta name="description" content="Yılmaz Nacakgediği için hazırlanmış doğum günü sayfası." />
+  <style>
+    :root{
+      --bg:#fbfaf7; --text:#14161a; --muted:#4a4f59;
+      --card:#ffffff; --border:rgba(20,22,26,.10);
+      --shadow:0 12px 35px rgba(20,22,26,.08);
+      --accent:#b08a3b; --accent2:#0b2447;
+    }
+    [data-theme="dark"]{
+      --bg:#0e1116; --text:#f2f4f8; --muted:#b6bcc8;
+      --card:#121823; --border:rgba(242,244,248,.10);
+      --shadow:0 14px 45px rgba(0,0,0,.35);
+      --accent:#d4b15a; --accent2:#8fb7ff;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      line-height:1.6;
+    }
+    .container{width:min(1100px,calc(100% - 32px)); margin:0 auto;}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:blur(10px);
+      background:color-mix(in oklab, var(--bg) 75%, transparent);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar__inner{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0;}
+    .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); font-weight:650}
+    .brand__dot{width:10px;height:10px;border-radius:50%; background:var(--accent);
+      box-shadow:0 0 0 4px color-mix(in oklab,var(--accent) 20%, transparent);}
+    .nav{display:flex; gap:10px; align-items:center;}
+    .nav a{color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:10px;}
+    .nav a:hover{background:color-mix(in oklab,var(--card) 70%, transparent); color:var(--text);}
+    .btn{
+      border:1px solid var(--border);
+      background:var(--accent2); color:#fff;
+      padding:10px 14px; border-radius:14px;
+      text-decoration:none; display:inline-flex; align-items:center; justify-content:center;
+      cursor:pointer; box-shadow:var(--shadow);
+    }
+    .btn--ghost{background:transparent; color:var(--text); box-shadow:none;}
+    .btn--small{padding:9px 12px; border-radius:12px; margin-top:12px;}
+    .hero{padding:54px 0 22px;}
+    .hero__grid{display:grid; grid-template-columns:1.1fr .9fr; gap:22px; align-items:start;}
+    .eyebrow{margin:0 0 10px; color:var(--muted); text-transform:uppercase; font-size:12px; letter-spacing:.4px;}
+    h1{margin:0 0 10px; font-size:clamp(30px,4vw,46px); line-height:1.15;}
+    .accent{color:var(--accent);}
+    .lead{margin:0 0 18px; color:var(--muted); font-size:16.5px; max-width:62ch;}
+    .hero__actions{display:flex; gap:10px; flex-wrap:wrap;}
+    .meta{margin:14px 0 0; color:var(--muted); font-size:13px;}
+    .section{padding:44px 0;}
+    .section--alt{
+      background:color-mix(in oklab,var(--card) 55%, transparent);
+      border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    }
+    h2{font-size:26px; margin:0 0 6px;}
+    .sub{margin:0 0 22px; color:var(--muted); max-width:72ch;}
+    .card{background:var(--card); border:1px solid var(--border); border-radius:18px; box-shadow:var(--shadow);}
+    figure{margin:0}
+    .hero__photo{overflow:hidden;}
+    .hero__photo img{width:100%; display:block; aspect-ratio:4/3; object-fit:cover;}
+    .hero__photo figcaption{padding:12px 14px; color:var(--muted); font-size:13px; border-top:1px solid var(--border);}
+    .cards{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+    .cards .card{padding:14px 14px 16px;}
+    .cards h3{margin:0 0 6px; font-size:16px;}
+    .cards p{margin:0; color:var(--muted);}
+    .quote{margin-top:14px; padding:14px; border-left:4px solid var(--accent);}
+    .quote p{margin:0; font-style:italic;}
+    .timeline{list-style:none; padding:0; margin:18px 0 0; display:flex; flex-direction:column; gap:12px;}
+    .timeline__item{
+      display:grid; grid-template-columns:120px 1fr; gap:14px;
+      padding:14px; border-radius:18px; background:var(--card);
+      border:1px solid var(--border); box-shadow:var(--shadow);
+    }
+    .timeline__date{font-weight:700; color:var(--accent2);}
+    .timeline__content h3{margin:0 0 6px; font-size:16px;}
+    .timeline__content p{margin:0; color:var(--muted);}
+    .letter{padding:18px;}
+    .letter p{margin:0 0 12px;}
+    .letter__sig{margin-top:18px; color:var(--muted);}
+    .status{margin:10px 0 0; font-size:13px; color:var(--muted); min-height:18px;}
+    .footer{margin-top:18px; color:var(--muted); font-size:13px;}
+    /* reveal */
+    .reveal{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease;}
+    .reveal.is-visible{opacity:1; transform:translateY(0);}
+
+    /* Mobile tweaks */
+    @media (max-width: 900px){
+      .hero__grid{grid-template-columns:1fr;}
+      .nav{display:none;}
+    }
+    @media (max-width: 560px){
+      .container{width:calc(100% - 24px);}
+      .cards{grid-template-columns:1fr;}
+      .timeline__item{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="#top">
+        <span class="brand__dot"></span>
+        <span>Yılmaz Nacakgediği</span>
+      </a>
+
+      <nav class="nav">
+        <a href="#hikaye">Hikâye</a>
+        <a href="#yolculuk">Yolculuk</a>
+        <a href="#mektup">Mektubum</a>
+      </nav>
+
+      <button id="themeBtn" class="btn btn--ghost" type="button" aria-label="Tema değiştir">🌙</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">18.12 — Doğum günün kutlu olsun</p>
+          <h1>İyi ki doğdun baba.<br><span class="accent">Görmediğini verdin.</span></h1>
+
+          <p class="lead">
+            Bazı insanlar baba olmayı görerek öğrenir. Sen görmeden öğrendin.
+            Kendi çocukluğunda eksik kalan aile sıcaklığını bize kurdun.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn" href="#yolculuk">Yolculuğun</a>
+            <a class="btn btn--ghost" href="#mektup">Sana mektubum</a>
+          </div>
+
+          <p class="meta">Fotoğraf: <strong>50. yaş</strong> • <strong>18.12.2021</strong></p>
+        </div>
+
+        <figure class="hero__photo card reveal">
+          <img src="baba-50.jpg" alt="Aile fotoğrafı - 50. yaş (18.12.2021)">
+          <figcaption>Bir kareye sığan emek, merhamet ve yuva.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="hikaye" class="section">
+      <div class="container">
+        <h2>Seninle ilgili bildiğimiz en net şey</h2>
+        <p class="sub">Duruşun, emeğin ve kalbin… Hepsi bize bir şeyi öğretti: “Eksikten bile yuva yapılır.”</p>
+
+        <div class="cards">
+          <article class="card reveal">
+            <h3>Çalışkanlık</h3>
+            <p>Ben seni bildim bileli çalıştın. Gece gündüz… ama hep “biz” için.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Dürüstlük</h3>
+            <p>Borcuna sadık, sözüne bağlı bir adamsın. Her şeyden önce “doğru”yu seçtin.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Merhamet</h3>
+            <p>Kırgınlıklarını kötülüğe çevirmedin. Affettin, yardım ettin, yine de iyi kaldın.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Aile kuran adam</h3>
+            <p>Görmediğin bir aile ortamını bize kurdun. Yaşamadığın babalığı bize gösterdin.</p>
+          </article>
+        </div>
+
+        <div class="quote card reveal">
+          <p>“Senin hayatın, sessiz bir fedakârlığın hikâyesi.”</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="yolculuk" class="section section--alt">
+      <div class="container">
+        <h2>Yolculuğun</h2>
+        <p class="sub">Bazı tarihler bir takvim değil; bir karakter inşa eder.</p>
+
+        <ol class="timeline">
+          <li class="timeline__item reveal">
+            <div class="timeline__date">18.12.1971</div>
+            <div class="timeline__content">
+              <h3>Doğdun</h3>
+              <p>Ve yıllar sonra “babalık” dediğimiz şeyi bize kendi ellerinle kurdun.</p>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__date">17 yaş</div>
+            <div class="timeline__content">
+              <h3>İsviçre’ye gidiş</h3>
+              <p>Çalışmak için, tek başına…</p>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__date">5 yıl</div>
+            <div class="timeline__content">
+              <h3>Hasretle çalışma</h3>
+              <p>Aileni görmeden; çalıştın, biriktirdin, gönderdin… ve sorumluluğu yalnız taşıdın.</p>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__date">Antep</div>
+            <div class="timeline__content">
+              <h3>Memlekete dönüş</h3>
+              <p>Gönderdiğin onca şeye rağmen bir boşlukla karşılaşsan bile kalbini sertleştirmedin.</p>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__date">18.07.1996</div>
+            <div class="timeline__content">
+              <h3>Evlilik</h3>
+              <p>Yeni bir yuva… ve yeni bir başlangıç.</p>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__date">27.04.1997</div>
+            <div class="timeline__content">
+              <h3>Ben doğdum</h3>
+              <p>Ve ben seni hep emek verirken bildim.</p>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__date">Bugün</div>
+            <div class="timeline__content">
+              <h3>Hâlâ yol açıyorsun</h3>
+              <p>Emeklerinin karşılığını almışken bile durmuyor; kardeşlerim için de yol yapıyorsun.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="mektup" class="section">
+      <div class="container">
+        <h2>Sana mektubum</h2>
+        <p class="sub">Bu satırlar “kutlama”dan çok, bir teşekkür.</p>
+
+        <div class="letter card reveal" id="letterBox">
+          <p><strong>Sevgili Babam,</strong></p>
+          <p>Hayatın boyunca çok şey taşıdın. Bazen yükünü kimse görmedi, bazen de kimse sormadı. Sen yine de durmadın.</p>
+          <p>Senin hikâyen biraz buruk… Ama ben bu burukluğun içinden çıkardığın iyiliğe hayranım.</p>
+          <p>Kendi babandan görmediğin sevgiyi, kendi evinde bize göstermeye çalıştın. Görmediğin aile sıcaklığını kurmaya uğraştın. Ve yaşamadığın babalığı bize yaşattın.</p>
+          <p>17 yaşında gurbete gidip yıllarca yalnız kalmayı, hasretle çalışmayı, ailesine bakmayı seçtin. Sonra memlekete dönünce bir boşlukla karşılaşsan bile kalbini sertleştirmedin.</p>
+          <p>Dürüstlüğünle, merhametinle, insanlara güvenen iyi kalbinle bize sadece “baba” olmadın; bir duruş öğrettin.</p>
+          <p>Bugün bile emeklerinin karşılığını almışken durmuyor, kardeşlerime yol açmaya çalışıyorsun. Bunu herkes yapmaz baba.</p>
+          <p>Ben senden şunu öğrendim: İnsan, sevgisiz büyüse bile sevgiyi kurabilir. Eksikten bile yuva yapılabilir.</p>
+          <p>İyi ki varsın. İyi ki doğdun. <strong>Seni seviyorum.</strong></p>
+          <p class="letter__sig"><span>Kızın,</span><br><strong>Gökçe</strong></p>
+
+          <button id="copyBtn" class="btn btn--small" type="button">Mektubu kopyala</button>
+          <p id="copyStatus" class="status" aria-live="polite"></p>
+        </div>
+
+        <footer class="footer">
+          <p>© <span id="year"></span> • Yılmaz Nacakgediği için, sevgiyle.</p>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // theme toggle (persist)
+    const themeBtn = document.getElementById("themeBtn");
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+
+    const updateThemeIcon = () => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      themeBtn.textContent = isDark ? "☀️" : "🌙";
+    };
+    updateThemeIcon();
+
+    themeBtn.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      const next = current === "dark" ? "" : "dark";
+      if (next) document.documentElement.setAttribute("data-theme", next);
+      else document.documentElement.removeAttribute("data-theme");
+      localStorage.setItem("theme", next || "");
+      updateThemeIcon();
+    });
+
+    // reveal on scroll
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) e.target.classList.add("is-visible");
+      }
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // copy letter
+    const copyBtn = document.getElementById("copyBtn");
+    const copyStatus = document.getElementById("copyStatus");
+    const letterBox = document.getElementById("letterBox");
+
+    copyBtn.addEventListener("click", async () => {
+      try {
+        const text = Array.from(letterBox.querySelectorAll("p"))
+          .map(p => p.innerText.trim())
+          .filter(Boolean)
+          .join("\n\n");
+
+        await navigator.clipboard.writeText(text);
+        copyStatus.textContent = "Kopyalandı ✅";
+        setTimeout(() => (copyStatus.textContent = ""), 1800);
+      } catch (err) {
+        copyStatus.textContent = "Kopyalama olmadı. Manuel seçip kopyalayabilirsin.";
+      }
+    });
+  </script>
+</body>
+</html>
